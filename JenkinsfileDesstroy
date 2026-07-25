@@ -43,7 +43,7 @@ pipeline {
 
         stage('Manual Approval') {
             steps {
-                input message: 'Approve Terraform Apply?', ok: 'Deploy'
+                input message: 'Approve Terraform Destroy?', ok: 'Destroy'
             }
         }
 
