@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         AWS_REGION = 'us-east-1'
+        backend_bucket = 'dev-env-terraform-12345'
     }
 
     stages {
@@ -21,7 +22,7 @@ pipeline {
                 ]]) {
                     sh '''
                         aws sts get-caller-identity
-                        terraform init
+                        terraform init -backend-config="bucket=${backend_bucket}" -backend-config="key=terraform.tfstate" -backend-config="region=${AWS_REGION}"
                     '''
                 }
             }
@@ -69,8 +70,5 @@ pipeline {
             echo 'Deployment Failed.'
         }
 
-        always {
-            cleanWs()
-        }
     }
 }
