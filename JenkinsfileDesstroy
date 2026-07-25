@@ -54,7 +54,7 @@ pipeline {
                     credentialsId: 'aws-prod-creds'
                 ]]) {
                     sh '''
-                        terraform destroy tfplan
+                        terraform destroy -auto-approve
                     '''
                 }
             }
